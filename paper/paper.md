@@ -7,7 +7,6 @@ author:
 - name: "Carlos Maltzahn"
   affiliation: "_UC Santa Cruz_"
   email: "`carlosm@soe.ucsc.edu`"
-number-of-authors: 6
 abstract: |
   PopperCI is a service hosted at UC Santa Cruz that allows 
   researchers to automate the end-to-end execution and validation of 
@@ -49,11 +48,11 @@ execution and validation of experiments.
 This paper introduces PopperCI, the service that executes and 
 validates experiment implementations without requiring manual 
 intervention. We first give a brief description of the Popper 
-convention and how experiment validations are codified. We then 
-describe the design and implementation of the PopperCI, followed by a 
-use case that illustrates the usefulness of the service. We briefly 
-review related work and close with a brief discussion, and outline for 
-future work.
+convention and how experiment validations are codified (@Sec:popper). 
+We then describe PopperCI (@Sec:popperci), followed by a use case that 
+illustrates the usefulness of the service (@Sec:usecase). We briefly 
+review related work (@Sec:related) and close with a brief discussion, 
+and outline for future work (@Sec:conclusion).
 
 # Popper and Experiment Validations
 
@@ -101,16 +100,48 @@ for others to re-execute and validation experiments.
 
 ## Experiment Validations {#sec:validations}
 
+One optional but important component in Popper is the validation of 
+experiments by explicitly codifying expectations. These 
+domain-specific tests ensure that the claims made about the results of 
+an experiment are valid after every re-execution. An example of this 
+is performance regression testing done in software projects (e.g. 
+[ScalaMeter](https://scalameter.github.io)). In general, this can be 
+part of the analysis/visualization phase of the experimentation 
+workflow. To illustrate this stage further, consider an experiment 
+that measures the scalability of the system as the number of nodes 
+increases. One assertion
+
+The above expression is written in the Aver [@jimenez_aver_2016] 
+language. Aver is a language and tool that can be used to check the 
+integrity of runtime performance metrics that claims make reference 
+to. Examples of these type of assertions are: "the runtime of our 
+algorithm is 10x better than the baseline when the level of 
+parallelism exceeds 4 concurrent threads"; or "for dataset A, our 
+model predicts the outcome with an error of 95%". A more concrete 
+example is given in @Sec:usecase.
+
 # PopperCI {#sec:popperci}
 
+# Use Case {#sec:usecase}
 
-# Use Case
+DigitalOcean, Ansible, Docker, Jupyter
 
-# Discussion
+In this use case we show an experiment showing.
 
-# Related Work
+**NOTE**: We'll show a demo of this experiment.
 
-# Conclusion and Future Work
+# Discussion {#sec:discussion}
+
+PopperCI implicitly defines
+
+# Related Work {#sec:related}
+
+We don't know of anything like this. This is the cutting edge.
+
+# Conclusion and Future Work {#sec:conclusion}
+
+Our plan is to create a Terraform provider for CloudLab so that 
+researchers can integrate.
 
 # Bibliography
 
