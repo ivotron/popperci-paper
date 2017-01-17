@@ -103,12 +103,27 @@ in projects with a computational component viewed through a DevOps
 looking glass. The logos correspond to commonly used tools from the 
 "DevOps toolkit". From left-to-right, top-to-bottom: 
 [git](http://git-scm.com), [mercurial](http://mercurial-scm.org), 
-[subversion](http://subversion.apache.org) (code); [docker](http://docker.com), [vagrant](http://vagrantup.com), [spack](https://github.com/LLNL/spack), [nix](https://nixos.org/nix/) (packaging); 
-[git-lfs](http://git-lfs.github.com), [datapackages](http://frictionlessdata.io/data-packages/), [artifactory](https://www.jfrog.com/artifactory/), [archiva](https://archiva.apache.org/index.cgi) (input data); [bash](https://www.gnu.org/software/bash/), 
-[ansible](http://ansible.com), [puppet](https://puppet.com), [slurm](https://slurm.schedmd.com/) (execution); git-lfs, datapackages, [icinga](https://www.icinga.com/), 
-[nagios](https://www.nagios.org/) (output data and runtime metrics); [jupyter](http://jupyter.org), [paraview](http://paraview.org) (analysis and visualization); 
-[restructuredtext](http://docutils.sourceforge.net/rst.html), [latex](https://www.latex-project.org), [asciidoc](http://asciidoctor.org) and [markdown](http://daringfireball.net/projects/markdown/) (manuscript); 
-[gitlab](http://gitlab.com), [bitbucket](http://bitbucket.org) and [github](http://github.com) (experiment changes and labnotebook functionality).
+[subversion](http://subversion.apache.org) (code); 
+[docker](http://docker.com), [vagrant](http://vagrantup.com), 
+[spack](https://github.com/LLNL/spack), [nix](https://nixos.org/nix/) 
+(packaging); [git-lfs](http://git-lfs.github.com), 
+[datapackages](http://frictionlessdata.io/data-packages/), 
+[artifactory](https://www.jfrog.com/artifactory/), 
+[archiva](https://archiva.apache.org/index.cgi) (input data); 
+[bash](https://www.gnu.org/software/bash/), 
+[ansible](http://ansible.com), [puppet](https://puppet.com), 
+[slurm](https://slurm.schedmd.com/) (execution); git-lfs, 
+datapackages, [icinga](https://www.icinga.com/), 
+[nagios](https://www.nagios.org/) (output data and runtime metrics); 
+[jupyter](http://jupyter.org), [paraview](http://paraview.org) 
+(analysis and visualization); 
+[restructuredtext](http://docutils.sourceforge.net/rst.html), 
+[latex](https://www.latex-project.org), 
+[asciidoc](http://asciidoctor.org) and 
+[markdown](http://daringfireball.net/projects/markdown/) (manuscript); 
+[gitlab](http://gitlab.com), [bitbucket](http://bitbucket.org) and 
+[github](http://github.com) (experiment changes and labnotebook 
+functionality).
 ](figures/devops_approach.png){#fig:devops-approach}
 
 ## Experiment Validations {#sec:validations}
@@ -368,11 +383,10 @@ stages of the experimentation process.
 
 # Conclusion and Future Work {#sec:conclusion}
 
-Our plan is to create a Terraform provider for CloudLab so that 
-researchers can integrate. We could also have a provider for SLURM so 
-that HPC people can also take advantage of PopperCI. We are currently 
-working with researchers from other domains such as numeric weather 
-prediction [@hacker_containerized_2016] and [mathematical 
+By making use of PopperCI, researchers can ensure that their work is 
+reproducible and thus make it easier to share it with others. We are 
+currently working with researchers from other domains such as numeric 
+weather prediction [@hacker_containerized_2016] and [mathematical 
 sciences](https://github.com/systemslab/popper/wiki/Popper-Math-Science) 
 to automate experiments that follow the Popper convention so that they 
 can make use of PopperCI.
