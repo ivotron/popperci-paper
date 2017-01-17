@@ -64,8 +64,11 @@ followed by a use case that illustrates the usefulness of the service
 (@Sec:usecase). Lastly, we close with a brief discussion and outline 
 for future work (@Sec:conclusion).
 
-![This will show the PopperCI pipeline.
-](figures/devops_approach.png){#fig:popperci}
+![The continous integration (CI) PopperCI service automates the 
+execution and validation of of experiments that run on public, private 
+or government-funded cloud infrastructures. The status of an 
+experiment execution is reported at <popperci.falsifiable.com>.
+](figures/popperci_workflow.png){#fig:popperci}
 
 # Popper and Experiment Validations
 
@@ -115,7 +118,9 @@ looking glass. The logos correspond to commonly used tools from the
 [slurm](https://slurm.schedmd.com/) (execution); git-lfs, 
 datapackages, [icinga](https://www.icinga.com/), 
 [nagios](https://www.nagios.org/) (output data and runtime metrics); 
-[jupyter](http://jupyter.org), [paraview](http://paraview.org) 
+[jupyter](http://jupyter.org), 
+[zeppelin](http://zeppelin.apache.org/), 
+[paraview](http://paraview.org), [gephi](https://gephi.org/)
 (analysis and visualization); 
 [restructuredtext](http://docutils.sourceforge.net/rst.html), 
 [latex](https://www.latex-project.org), 
