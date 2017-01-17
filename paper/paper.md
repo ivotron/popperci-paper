@@ -3,18 +3,19 @@ title: "PopperCI: Automated Reproducibility Validation"
 author:
 - name: "Ivo Jimenez"
   affiliation: "_UC Santa Cruz_"
-  email: "`ivo@soe.ucsc.edu`"
+  email: "`ivo@cs.ucsc.edu`"
 - name: "Carlos Maltzahn"
   affiliation: "_UC Santa Cruz_"
-  email: "`carlosm@soe.ucsc.edu`"
+  email: "`carlosm@cs.ucsc.edu`"
 abstract: |
-  PopperCI is a service hosted at UC Santa Cruz that allows 
-  researchers to automate the end-to-end execution and validation of 
-  experiments. PopperCI assumes that experiments follow Popper, a 
-  recently proposed convention for implementing experiments and 
-  writing articles following a DevOps approach. PopperCI can be used 
-  to run experiments on public or government-fundend cloud 
-  infrastructures. In this paper we describe the design and 
+  This paper describes PopperCI, a continous integration (CI) service 
+  for experiments hosted at UC Santa Cruz that allows researchers to 
+  automate the end-to-end execution and validation of experiments. 
+  PopperCI assumes that experiments follow Popper, a convention for 
+  implementing experiments and writing articles following a DevOps 
+  approach that has been proposed recently. PopperCI runs experiments 
+  on public, private or government-fundend cloud infrastructures in a 
+  fully automated way. In this paper we describe the design and 
   implementation of PopperCI, and present a use case that illustrates 
   the usefulness of this service.
 documentclass: ieeetran
@@ -24,36 +25,44 @@ monofont-size: scriptsize
 numbersections: true
 usedefaultspacing: true
 fontfamily: times
-linkcolor: black
+linkcolor: cyan
+urlcolor: cyan
 secPrefix: section
 ---
 
 # Introduction
 
 Independently validating experimental results in the field of computer 
-systems research is a challenging task [@freire_computational_2012 ; 
-@fursin_collective_2013]. Recreating an environment that resembles the 
-one where an experiment was originally executed is a time-consuming 
-endeavour [@collberg_repeatability_2015 ; @hoefler_scientific_2015]. 
+and networking systems research is a challenging task 
+[@freire_computational_2012 ; @fursin_collective_2013]. Recreating an 
+environment that resembles the one where an experiment was originally 
+executed is a time-consuming endeavour [@collberg_repeatability_2015 ; 
+@hoefler_scientific_2015]. Additionally, DOE's Office of Advanced 
+Scientific Computing Research (ASCR) and the National Science 
+Foundation (NSF) have been recently stressing the need of requiring 
+grant proposals to include a section on reproducibility, detailing how 
+the research byproducts of a computational project can be replicated 
+[@johansen_extremescale_2014].
+
 Popper [@jimenez_popper_2016 ; @jimenez_standing_2016] is a convention 
 for conducting experiments and writing academic article’s following a 
 DevOps [@kim_devops_2016] approach that allows researchers to generate 
 work that is easy to reproduce. While being Popper-compliant doesn't 
 require projects to structure an experiment's artifacts in any 
 particular way, organizing projects in the way it is described here 
-allows experimenters to make use of PopperCI, a service hosted at UC 
-Santa Cruz that allows researchers to automate the end-to-end 
-execution and validation of experiments.
+allows experimenters to make use of 
+[PopperCI](<popperci.falsifiable.us>), a continuous integration (CI) 
+service hosted at UC Santa Cruz that allows researchers to automate 
+the end-to-end execution and validation of experiments.
 
-This paper introduces PopperCI, the service that executes and 
-validates experiment implementations without requiring manual 
+This paper describes how PopperCI automates the execution and 
+validation of experiment implementations without requiring manual 
 intervention. We first give a brief description of the Popper 
 convention (@Sec:popper) and how experiment validations are codified 
 (@Sec:validations). We then describe PopperCI (@Sec:popperci), 
 followed by a use case that illustrates the usefulness of the service 
-(@Sec:usecase). We briefly review related work (@Sec:related) and 
-close with a brief discussion, and outline for future work 
-(@Sec:conclusion).
+(@Sec:usecase). Lastly, we close with a brief discussion and outline 
+for future work (@Sec:conclusion).
 
 ![This will show the PopperCI pipeline.
 ](figures/devops_approach.png){#fig:popperci}
@@ -92,14 +101,14 @@ for others to re-execute and validation experiments.
 ![A generic experimentation workflow typically followed by researchers 
 in projects with a computational component viewed through a DevOps 
 looking glass. The logos correspond to commonly used tools from the 
-"DevOps toolkit". From left-to-right, top-to-bottom: git, mercurial, 
-subversion (code); docker, vagrant, spack, nix (packaging); git-lfs, 
-datapackages, artifactory, archiva (input data); bash, ansible, 
-puppet, slurm (execution); git-lfs, datapackages, icinga, nagios 
-(output data and runtime metrics); jupyter, paraview, travis, jenkins 
-(analysis, visualization and continuous integration); restructured 
-text, latex, asciidoctor and markdown (manuscript); gitlab, bitbucket 
-and github (experiment changes).
+"DevOps toolkit". From left-to-right, top-to-bottom: 
+[git](http://git-scm.com), [mercurial](http://mercurial-scm.org), 
+[subversion](http://subversion.apache.org) (code); [docker](http://docker.com), [vagrant](http://vagrantup.com), [spack](https://github.com/LLNL/spack), [nix](https://nixos.org/nix/) (packaging); 
+[git-lfs](http://git-lfs.github.com), [datapackages](http://frictionlessdata.io/data-packages/), [artifactory](https://www.jfrog.com/artifactory/), [archiva](https://archiva.apache.org/index.cgi) (input data); [bash](https://www.gnu.org/software/bash/), 
+[ansible](http://ansible.com), [puppet](https://puppet.com), [slurm](https://slurm.schedmd.com/) (execution); git-lfs, datapackages, [icinga](https://www.icinga.com/), 
+[nagios](https://www.nagios.org/) (output data and runtime metrics); [jupyter](http://jupyter.org), [paraview](http://paraview.org) (analysis and visualization); 
+[restructuredtext](http://docutils.sourceforge.net/rst.html), [latex](https://www.latex-project.org), [asciidoc](http://asciidoctor.org) and [markdown](http://daringfireball.net/projects/markdown/) (manuscript); 
+[gitlab](http://gitlab.com), [bitbucket](http://bitbucket.org) and [github](http://github.com) (experiment changes and labnotebook functionality).
 ](figures/devops_approach.png){#fig:devops-approach}
 
 ## Experiment Validations {#sec:validations}
@@ -247,7 +256,7 @@ following steps:
 For multi-node experiments that run on remote infrastructure, PopperCI 
 leverages [Terraform](https://terraform.io) to initialize the 
 resources that an experiment has available to it. A special 
-`terraform/` folder contains one or more Terraform [configuration 
+`terraform/` folder contains one or more [Terraform configuration 
 files](https://www.terraform.io/docs/configuration/) (JSON-compatible, 
 declarative format) that specify the infrastructure that needs to be 
 instantiated in order for the experiment to execute. In this case, the 
@@ -307,37 +316,66 @@ spark-standalone  torpor     malacology
 $ popper add torpor myexp
 ```
 
-# Use Case {#sec:usecase}
+# Use Case[^demo] {#sec:usecase}
 
-DigitalOcean, Ansible, Docker, Jupyter
+In this use case we show a multi-node experiment being executed on two 
+clouds (DigitalOcean and CloudLab).
 
-In this use case we show an experiment showing.
-
-**NOTE**: We'll show a demo of this experiment.
+[^demo]: **NOTE to reviewers**: we will show a demo of this experiment 
+during our presentation.
 
 # Discussion {#sec:discussion}
 
-Heterogeneity is here to stay. Even in HPC settings, scheduling work 
-on multi-node, heterogeneous resources is not trivial. Terraform 
-allows to abstract this in a clean manner.
+  * Heterogeneity is here to stay. Even in HPC settings, scheduling 
+    work on multi-node, heterogeneous resources is not trivial. 
+    Terraform allows to abstract this in a clean manner.
 
-PopperCI implicitly defines repeatability and reproducibility in the 
-following way:
+  * PopperCI implicitly defines repeatability and reproducibility in 
+    the following way:
+      * Repeatability. An experiment can be re-executed without 
+        errors.
+      * Reproducibility. The output of an experiment validates the 
+        original experiment.
 
-  * Repeatability. An experiment can be re-executed without errors.
-  * Reproducibility. The output of an experiment validates the 
-    original experiment.
+  * Cons: learning curve. Cultural change required.
 
 # Related Work {#sec:related}
 
-We don't know of anything like this yet, we need to investigate what's 
-the closest to this.
+[TravisCI](http://travis-ci.org) is a hosted CI service that allows 
+open source projects on github to connect their work. We strive to 
+have the same simplicity of Travis by choosing "convention over 
+configuration". [Jenkins](http://jenkins.io) is an open source 
+automation server most commonly used for CI. By making the notion of 
+experiments and validations a "first-class" citizen in the CI cycle, 
+PopperCI can be described as specialization of these and other CI 
+tools and services, targeting research communities from many domains.
+
+Current experimental practices include the usage of hosted 
+version-control systems (such as github) to share the source code 
+associated to an experiment. However, availability of source code does 
+not guarantee reproducibility [@collberg_repeatability_2015]. An 
+alternative to sharing source code is experiment repositories 
+[@stodden_researchcompendiaorg_2015 ; @roure_designing_2007], which 
+make all the associated artifacts available in a webpage. The 
+availability of the artifacts does not guarantee the reproduction of 
+results since a significant amount of manual work needs to be done 
+after these have been downloaded. Another alternative is to pack 
+experiments by tracing, at runtime, dependencies and generating a 
+package that can be shared with others [@chirigati_reprozip_2016 ; 
+@davison_sumatra_2014]. The Popper Convention and PopperCI can be seen 
+as a superset of these approaches since it embodies all the different 
+stages of the experimentation process.
 
 # Conclusion and Future Work {#sec:conclusion}
 
 Our plan is to create a Terraform provider for CloudLab so that 
-researchers can integrate. We could also have one for SLURM so that 
-HPC people can use this
+researchers can integrate. We could also have a provider for SLURM so 
+that HPC people can also take advantage of PopperCI. We are currently 
+working with researchers from other domains such as numeric weather 
+prediction [@hacker_containerized_2016] and [mathematical 
+sciences](https://github.com/systemslab/popper/wiki/Popper-Math-Science) 
+to automate experiments that follow the Popper convention so that they 
+can make use of PopperCI.
 
 # Bibliography
 
