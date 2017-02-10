@@ -87,9 +87,9 @@ experiment execution is reported at
 <http://popperci.falsifiable.com>[^note].
 ](figures/popperci_workflow.png){#fig:popperci}
 
-[^note]: Since the service is in beta and still under development, 
-sometimes the URL might point to a 404 webpage. We kindly ask 
-reviewers to check back later.
+[^note]: Since the service is in alpha phase and still under 
+development, sometimes the URL might point to a 404 webpage. We kindly 
+ask reviewers to check back later.
 
 # Popper and Experiment Validations
 
