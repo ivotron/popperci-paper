@@ -4,6 +4,9 @@ author:
 - name: "Ivo Jimenez"
   affiliation: "_UC Santa Cruz_"
   email: "`ivo@cs.ucsc.edu`"
+- name: "Sina Hamedian"
+  affiliation: "_UC Santa Cruz_"
+  email: "`sina@ucsc.edu`"
 - name: "Jay Lofstead"
   affiliation: "_Sandia National Laboratories_"
   email: "`gflofst@sandia.gov`"
@@ -81,10 +84,9 @@ followed by a use case that illustrates the usefulness of the service
 for future work (@Sec:conclusion).
 
 ![The continous integration (CI) PopperCI service automates the 
-execution and validation of of experiments that run on public, private 
-or government-funded cloud infrastructures. The status of an 
-experiment execution is reported at 
-<http://popperci.falsifiable.com>[^note].
+execution and validation of experiments that run on public, private or 
+government-funded cloud infrastructures. The status of an experiment 
+execution is reported at <http://popperci.falsifiable.com>[^note].
 ](figures/popperci_workflow.png){#fig:popperci}
 
 [^note]: Since the service is in alpha phase and still under 
