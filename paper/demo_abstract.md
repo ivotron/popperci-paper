@@ -1,5 +1,5 @@
 ---
-title: "PopperCI: Automated Reproducibility Validation"
+title: "Demo Abstract: PopperCI: Automated Reproducibility Validation"
 author:
 - name: "Ivo Jimenez"
   affiliation: "_UC Santa Cruz_"
@@ -39,7 +39,7 @@ secPrefix: section
 ---
 
 In this demo we illustrate the usage of 
-[PopperCI](https://github.com/ivotron/popperci-paper)[^note], a 
+PopperCI [@jimenez_popperci_2017], a 
 continous integration 
 (CI) service for experiments hosted at UC Santa Cruz that allows 
 researchers to automate the end-to-end execution and validation of 
@@ -47,13 +47,6 @@ experiments. PopperCI assumes that experiments follow Popper
 [@jimenez_standing_2016], a convention for implementing experiments 
 and writing articles following a DevOps approach that has been 
 proposed recently.
-
-[^note]: **NOTE TO REVIEWERS**: An article on PopperCI has been 
-accepted to be presented at the CNERT '17 workshop. We will cite the 
-paper instead of having a link. Since the service is in alpha phase 
-and still under development, sometimes the <http://ci.falsifiable.us> 
-URL might point to a 404 webpage. We kindly ask reviewers to check 
-back later.
 
 # Popper, Experiment Validations and PopperCI
 
@@ -99,8 +92,7 @@ workflow. To illustrate this stage further, consider an experiment
 that measures the scalability of the system as the number of nodes 
 increases. One assertion might be like the following:
 
-```{#lst:aver .bash caption="Example validation in the Aver 
-language."}
+```{#lst:aver .bash caption="Example validation in the Aver language."}
 WHEN
   NOT network_saturated AND num_nodes=*
 EXPECT
@@ -118,11 +110,7 @@ In general, for experiments in the computer and networking systems
 research domain, most of the data that is used at this stage comes 
 from capturing runtime metrics about the underlying resources. 
 Monitoring tools such as [Nagios](http://nagios.org) and 
-[`collectd`](http://collectd.org) can be used for this purpose. Other 
-examples of this type of assertions are: "the runtime of our algorithm 
-is 10x better than the baseline when the level of parallelism exceeds 
-4 concurrent threads"; or "for dataset A, our model predicts the 
-outcome with an error of 5% at the 95 percent level of confidence".
+[`collectd`](http://collectd.org) can be used for this purpose.
 
 [^aver]: Aver is a language and tool that can be used to check the 
 integrity of runtime performance metrics that claims make reference 
@@ -209,7 +197,7 @@ The output dataset for this experiment is in tabular format with two
 columns `num_workers` and `runtime`. The condition that is checked for 
 this experiment is the following:
 
-```{#lst:spark .sql caption="Validation for this use case that increasing the number of workers decreases the runtime of the experiment."}
+```{#lst:spark .sql caption="Validation for this use case."}
 EXPECT
   runtime(num_workers=8) < runtime(num_workers=4)
 ```
