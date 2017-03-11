@@ -1,8 +1,5 @@
 ---
-remote_results_path: "/tmp/results/{{ lookup('pipe', 'date +%s') }}"
-
-enable_monitoring: true
-leave_monitor_running: true
+remote_results_path: "/tmp/results/"
 
 benchmarks:
 - name: spark-perf-ml
@@ -12,7 +9,6 @@ benchmarks:
     ADD_INSECURE_KEY: true
     WAIT_SSHD_SECS: 5
     WORKER_MEMORY: 5g
-    WORKER_CORES: 4
     WORKER_INSTANCES: 5
     ML_SCALE_FACTOR: 0.01
     ML_IGNORED_TRIALS: 1
@@ -31,3 +27,6 @@ benchmarks:
   - '{{ remote_results_path }}/sparklogs/eventlogs:/spark/logs/eventlogs'
   fetch:
   - '{{ remote_results_path }}'
+  parameters:
+    WORKER_CORES: [2,4]
+    ITERATION: [1,2,3]

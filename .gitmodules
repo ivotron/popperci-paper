@@ -1,0 +1,3 @@
+[submodule "experiments/spark-perf/ansible/roles/baseliner"]
+	path = experiments/spark-perf/ansible/roles/baseliner
+	url = https://github.com/ivotron/baseliner

@@ -1,1 +1,2 @@
 *.sw?
+experiments/spark-perf/ansible/vars.yml
