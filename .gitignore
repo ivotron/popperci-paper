@@ -1,2 +1,4 @@
 *.sw?
 experiments/spark-perf/ansible/vars.yml
+.DS_Store
+.ipynb_checkpoints/
